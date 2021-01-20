@@ -1,0 +1,9 @@
+dipy
+disimpy
+nibabel
+numba
+numpy
+matplotlib
+Pillow
+scikit-image
+scipy

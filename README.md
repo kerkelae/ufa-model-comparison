@@ -1,0 +1,3 @@
+# μFA model comparison
+
+This repository contains the code for reproducing the results of *"Comparative analysis of signal models for microscopic anisotropy estimation using q-space trajectory encoding" by Kerkelä et al. (2021)*. The modules `cumulant.py`, `higher_order.py`, `gamma.py`, and `qti.py` contain the code for fitting the signal models to data. The notebook `simulations.ipynb` contains the code for performing the simulation experiments. The notebook `analysis.ipynb` contains the code for calculating the presented results and generating the figures. A link for downloading the preprocessed data will be provided after the paper is published.
