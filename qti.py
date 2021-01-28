@@ -111,9 +111,9 @@ def calc_design_matrix(lte_bvecs, lte_bvals, ste_bvecs, ste_bvals):
 def fit_qti(S, X):
     """Fit QTI to data."""
     N = len(S)
-    C = np.eye(N) * S**2
+    C = np.eye(N) * S
     S = np.log(S)[:, np.newaxis]
-    S[np.isnan(S)] = 0  # In case signal <= 0
+    S[np.isnan(S)] = 0
     A = np.matmul(np.matmul(X.T, C), X)
     B = np.matmul(X.T, C)
     beta = np.matmul(np.matmul(np.linalg.pinv(A), B), S)

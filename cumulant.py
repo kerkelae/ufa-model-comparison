@@ -37,9 +37,9 @@ def fit_cum_model(pa_lte, pa_ste, bs, x0=None,
         x0[1] = 1  # MD initial
         x0[2] = .1  # V_iso initial
         x0[3] = .1  # V_aniso initial
-    fit = scipy.optimize.least_squares(fun=cum_res_f, x0=x0,
-                                       args=(np.concatenate((pa_lte, pa_ste)),
-                                             bs), bounds=bounds, method='trf')
+    fit = scipy.optimize.least_squares(
+        fun=cum_res_f, x0=x0, args=(np.concatenate((pa_lte, pa_ste)), bs),
+        bounds=bounds, method='trf')
     return fit.x
 
 

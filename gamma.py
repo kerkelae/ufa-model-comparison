@@ -15,9 +15,8 @@ def gamma_model_f(x, bs):
     MD = x[1]
     V_iso = x[2]
     V_aniso = x[3]
-    S_lte = S0 * (1 + bs * (V_iso + V_aniso) /
-                  MD)**(-MD**2 / (V_iso + V_aniso))  # .8 or 1
-    S_ste = S0 * (1 + bs * V_iso / MD)**(-MD**2 / V_iso)
+    S_lte = S0 * (1 + bs * (V_iso + V_aniso) / MD)**(- MD**2 / (V_iso + V_aniso))
+    S_ste = S0 * (1 + bs * V_iso / MD)**(- MD**2 / V_iso)
     return np.concatenate((S_lte, S_ste))
 
 
@@ -39,9 +38,10 @@ def fit_gamma_model(pa_lte, pa_ste, bs, x0=None,
         x0[1] = 1  # MD initial
         x0[2] = .1  # V_iso initial
         x0[3] = .1  # V_aniso initial
-    fit = scipy.optimize.least_squares(fun=gamma_res_f, x0=x0,
-                                       args=(np.concatenate((pa_lte, pa_ste)),
-                                             bs), bounds=bounds, method='trf')
+    fit = scipy.optimize.least_squares(
+        fun=gamma_res_f, x0=x0,
+        args=(np.concatenate((pa_lte, pa_ste)), bs),
+        bounds=bounds, method='trf')
     return fit.x
 
 

@@ -14,10 +14,9 @@ def ho_model_f(x, bs):
     MD = x[1]
     V_iso = x[2]
     V_aniso = x[3]
-    P3_lte = x[4]
-    S_lte = S0 * np.exp(-bs * MD + .5 * bs**2 *
-                        (V_aniso + V_iso)) - bs**3 * P3_lte
-    S_ste = S0 * np.exp(-bs * MD + .5 * bs**2 * (V_iso)) - bs**3
+    P3 = x[4]
+    S_lte = S0 * np.exp(-bs * MD + .5 * bs**2 * (V_aniso + V_iso) - bs**3 * P3)
+    S_ste = S0 * np.exp(-bs * MD + .5 * bs**2 * (V_iso))
     return np.concatenate((S_lte, S_ste))
 
 
@@ -40,10 +39,11 @@ def fit_ho_model(pa_lte, pa_ste, bs, x0=None,
         x0[1] = 1  # MD initial
         x0[2] = .1  # V_iso initial
         x0[3] = .1  # V_aniso initial
-        x0[4] = 10  # P_3
-    fit = scipy.optimize.least_squares(fun=ho_res_f, x0=x0,
-                                       args=(np.concatenate((pa_lte, pa_ste)),
-                                             bs), bounds=bounds, method='trf')
+        x0[4] = .1  # P_3
+    fit = scipy.optimize.least_squares(
+        fun=ho_res_f, x0=x0,
+        args=(np.concatenate((pa_lte, pa_ste)), bs),
+        bounds=bounds, method='trf')
     return fit.x
 
 
