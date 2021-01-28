@@ -39,7 +39,7 @@ def fit_ho_model(pa_lte, pa_ste, bs, x0=None,
         x0[1] = 1  # MD initial
         x0[2] = .1  # V_iso initial
         x0[3] = .1  # V_aniso initial
-        x0[4] = .1  # P_3
+        x0[4] = 0 # P_3
     fit = scipy.optimize.least_squares(
         fun=ho_res_f, x0=x0,
         args=(np.concatenate((pa_lte, pa_ste)), bs),
