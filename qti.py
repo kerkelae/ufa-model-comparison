@@ -83,8 +83,9 @@ def from_21x1_to_6x6(V):
     return T
 
 
+e_iso = np.eye(3) / 3
 E_iso = np.eye(6) / 3
-E_bulk = np.dot(from_3x3_to_6x1(E_iso), from_3x3_to_6x1(E_iso).T)
+E_bulk = np.dot(from_3x3_to_6x1(e_iso), from_3x3_to_6x1(e_iso).T)
 E_shear = E_iso - E_bulk
 spherical_tensor = np.eye(3) / 3
 linear_tensor = np.zeros((3, 3))
